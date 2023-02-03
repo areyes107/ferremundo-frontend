@@ -64,6 +64,7 @@ export function Home() {
     getDataFromReferences(users.map(({ cart }) => cart)).then((item) =>
       setUserProducts(item)
     );
+    // eslint-disable-next-line
   }, [users]);
 
   return (
@@ -79,7 +80,7 @@ export function Home() {
             product_category,
           }) => {
             return (
-              <li>
+              <li key={id}>
                 <ul>{id}</ul>
                 <ul>{product_name}</ul>
                 <ul>{product_description}</ul>
@@ -94,7 +95,7 @@ export function Home() {
         <h2>USERS</h2>
         {users.map(({ id, user_name, user_type }) => {
           return (
-            <li>
+            <li key={id}>
               <ul>{id}</ul>
               <ul>{user_name}</ul>
               <ul>{user_type}</ul>
