@@ -2,9 +2,28 @@ import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase.util";
 
+const UseUsersData = () => {
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const snapshot = await getDocs(collection(db, "users"));
+      const listProducts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      listProducts.sort((a, b) => (a.product_name > b.product_name ? 1 : -1));
+      setUserData(listProducts);
+    };
+    getUsers();
+  }, []);
+
+  return [userData, setUserData];
+};
+
 export function Home() {
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = UseUsersData();
   const [userProducts, setUserProducts] = useState([]);
 
   const destructureReference = async (references) => {
@@ -33,19 +52,6 @@ export function Home() {
 
     return entitiesData;
   };
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const snapshot = await getDocs(collection(db, "users"));
-      const listProducts = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      listProducts.sort((a, b) => (a.product_name > b.product_name ? 1 : -1));
-      setUsers(listProducts);
-    };
-    getUsers();
-  }, []);
 
   useEffect(() => {
     const getProducts = async () => {
