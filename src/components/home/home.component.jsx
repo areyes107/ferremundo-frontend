@@ -8,12 +8,12 @@ const UseUsersData = () => {
   useEffect(() => {
     const getUsers = async () => {
       const snapshot = await getDocs(collection(db, "users"));
-      const listProducts = snapshot.docs.map((doc) => ({
+      const listUsers = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      listProducts.sort((a, b) => (a.product_name > b.product_name ? 1 : -1));
-      setUserData(listProducts);
+      listUsers.sort((a, b) => (a.user_name > b.user_name ? 1 : -1));
+      setUserData(listUsers);
     };
     getUsers();
   }, []);
@@ -23,6 +23,7 @@ const UseUsersData = () => {
 
 export function Home() {
   const [products, setProducts] = useState([]);
+  // eslint-disable-next-line
   const [users, setUsers] = UseUsersData();
   const [userProducts, setUserProducts] = useState([]);
 
@@ -55,12 +56,14 @@ export function Home() {
 
   useEffect(() => {
     const getProducts = async () => {
-      const snapshot = await getDocs(collection(db, "products"));
+      const snapshot = await getDocs(collection(db, "products-inventory"));
       const listProducts = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      listProducts.sort((a, b) => (a.product_name > b.product_name ? 1 : -1));
+      listProducts.sort((a, b) => {
+        return a.itemsItemId - b.itemsItemId;
+      });
       setProducts(listProducts);
     };
     getProducts();
@@ -77,25 +80,16 @@ export function Home() {
     <div style={{ padding: "10vh" }}>
       <div>
         <h2>Products</h2>
-        {products.map(
-          ({
-            id,
-            product_name,
-            product_price,
-            product_description,
-            product_category,
-          }) => {
-            return (
-              <li key={id}>
-                <ul>{id}</ul>
-                <ul>{product_name}</ul>
-                <ul>{product_description}</ul>
-                <ul>Q{product_price}</ul>
-                <ul>{product_category}</ul>
-              </li>
-            );
-          }
-        )}
+        {products.map(({ id, name, costPrice, itemsItemId, category }) => {
+          return (
+            <li key={id}>
+              <ul>{name}</ul>
+              <ul>{itemsItemId}</ul>
+              <ul>{costPrice}</ul>
+              <ul>{category}</ul>
+            </li>
+          );
+        })}
       </div>
       <div>
         <h2>USERS</h2>
