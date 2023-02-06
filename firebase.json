@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site":"ferremundo",
+    "site":"ferremundo-6bfb3",
     "public": "public",
     "ignore": [
       "firebase.json",
