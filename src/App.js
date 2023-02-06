@@ -4,11 +4,12 @@ import {
   RouterProvider,
   useRouteError,
 } from "react-router-dom";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { ThemeProvider } from "styled-components";
 import { CssBaseline } from "@mui/material";
 import theme from "./styles/theme";
 import { Home } from "./components/home/home.component";
+import Products from "./components/products/products.component";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,7 +18,12 @@ function App() {
       element: <Home />,
       errorElement: <ErrorBoundary />,
     },
-    { path: "home", element: <div>Home</div>, errorElement: <ErrorBoundary /> },
+    { path: "home", element: <Home />, errorElement: <ErrorBoundary /> },
+    {
+      path: "products",
+      element: <Products />,
+      errorElement: <ErrorBoundary />,
+    },
     {
       path: "login",
       element: <div>Login</div>,

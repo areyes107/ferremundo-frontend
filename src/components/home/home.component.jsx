@@ -22,7 +22,6 @@ const UseUsersData = () => {
 };
 
 export function Home() {
-  const [products, setProducts] = useState([]);
   // eslint-disable-next-line
   const [users, setUsers] = UseUsersData();
   const [userProducts, setUserProducts] = useState([]);
@@ -55,21 +54,6 @@ export function Home() {
   };
 
   useEffect(() => {
-    const getProducts = async () => {
-      const snapshot = await getDocs(collection(db, "products-inventory"));
-      const listProducts = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      listProducts.sort((a, b) => {
-        return a.itemsItemId - b.itemsItemId;
-      });
-      setProducts(listProducts);
-    };
-    getProducts();
-  }, []);
-
-  useEffect(() => {
     getDataFromReferences(users.map(({ cart }) => cart)).then((item) =>
       setUserProducts(item)
     );
@@ -78,19 +62,6 @@ export function Home() {
 
   return (
     <div style={{ padding: "10vh" }}>
-      <div>
-        <h2>Products</h2>
-        {products.map(({ id, name, costPrice, itemsItemId, category }) => {
-          return (
-            <li key={id}>
-              <ul>{name}</ul>
-              <ul>{itemsItemId}</ul>
-              <ul>{costPrice}</ul>
-              <ul>{category}</ul>
-            </li>
-          );
-        })}
-      </div>
       <div>
         <h2>USERS</h2>
         {users.map(({ id, user_name, user_type }) => {
