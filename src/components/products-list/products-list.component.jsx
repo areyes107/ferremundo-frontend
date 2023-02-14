@@ -29,7 +29,14 @@ export default function ProductsList() {
   // eslint-disable-next-line
   const [products, setProducts] = UseProductsData();
   return (
-    <div style={{ padding: "2vw", display: "flex" }}>
+    <div
+      style={{
+        padding: "2vw",
+        display: "grid",
+        gridGap: "15px",
+        gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+      }}
+    >
       {products
         .filter(
           ({ itemNumber }) =>
@@ -39,44 +46,55 @@ export default function ProductsList() {
             itemNumber === "TP15657" ||
             itemNumber === "TP19360"
         )
-        .map(({ itemPic, name, itemNumber, itemsItemId, unitPrice }) => {
+        .map(({ itemPic, name, itemsItemId, unitPrice, category }) => {
           return (
-            <Paper
-              style={{
-                maxWidth: "350px",
-                paddingTop: 24,
-                paddingBottom: 24,
-                paddingRight: 24,
-                margin: "1vh",
-                borderRadius: "16px",
-              }}
-            >
-              <ul
-                key={itemsItemId}
+            <Paper style={{ borderRadius: "12px" }}>
+              <img
+                src={itemPic}
+                alt=" "
                 style={{
-                  listStyle: "none",
+                  width: "100%",
+                  borderRadius: "8px",
+                }}
+              />
+              <div
+                style={{
+                  marginBottom: "0.5em",
+                  padding: "16px",
+                  backgroundColor: "#ffffff",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                <li>
-                  <img
-                    src={itemPic}
-                    alt=" "
-                    style={{ width: "10vw", marginLeft: "2vw" }}
-                  />
-                </li>
-                <li style={{ textAlign: "center" }}>
-                  <b> {name} </b>
-                </li>
-                <li style={{ textAlign: "center" }}>{unitPrice}</li>
-                <li style={{ textAlign: "center" }}>
-                  <Button
-                    variant="contained"
-                    style={{ borderRadius: "12px", backgroundColor: "#b53836" }}
-                  >
-                    Agregar al Carrito
-                  </Button>
-                </li>
-              </ul>
+                <h5
+                  style={{
+                    textTransform: "uppercase",
+                    fontSize: "1.5em",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {name}
+                </h5>
+                <h6
+                  style={{
+                    textTransform: "uppercase",
+                    fontSize: "1em",
+                  }}
+                >
+                  {category}
+                </h6>
+                <p style={{ color: "#777" }}>{unitPrice}</p>
+                <Button
+                  style={{
+                    backgroundColor: "#b53836",
+                    borderRadius: "12px",
+                  }}
+                  variant="contained"
+                >
+                  Agregar al Carrito
+                </Button>
+              </div>
             </Paper>
           );
         })}
