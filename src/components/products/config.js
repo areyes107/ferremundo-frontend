@@ -28,6 +28,20 @@ const columns = [
     maxWidth: 250,
     align: "left",
   },
+  {
+    id: "code",
+    label: "código",
+    minWidth: 200,
+    maxWidth: 250,
+    align: "left",
+  },
+  {
+    id: "delete",
+    label: "",
+    minWidth: 200,
+    maxWidth: 250,
+    align: "left",
+  },
 ];
 
 export { columns };

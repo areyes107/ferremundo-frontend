@@ -1,4 +1,5 @@
 import {
+  Button,
   Paper,
   Table,
   TableBody,
@@ -8,7 +9,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase.util";
 import { columns } from "./config";
@@ -37,6 +38,21 @@ export default function Products() {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const deleteProduct = ({ id, name }) => {
+    console.log(id, name);
+    const productRef = doc(db, "products-inventory", id);
+
+    deleteDoc(productRef)
+      .then(() => {
+        alert(`Product ${name} eliminado correctamente`);
+        console.log(`Deleted ${id}`);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -71,18 +87,37 @@ export default function Products() {
 
             {products
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(({ category, costPrice, itemsItemId, name, unitPrice }) => {
-                return (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>{itemsItemId}</TableCell>
-                      <TableCell>{name}</TableCell>
-                      <TableCell>{category}</TableCell>
-                      <TableCell>{unitPrice}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                );
-              })}
+              .map(
+                ({
+                  category,
+                  itemNumber,
+                  itemsItemId,
+                  name,
+                  unitPrice,
+                  id,
+                }) => {
+                  return (
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>{itemsItemId}</TableCell>
+                        <TableCell>{name}</TableCell>
+                        <TableCell>{category}</TableCell>
+                        <TableCell>{unitPrice}</TableCell>
+                        <TableCell>{itemNumber}</TableCell>
+                        <TableCell>
+                          <Button
+                            onClick={() =>
+                              deleteProduct({ id: id, name: name })
+                            }
+                          >
+                            Eliminar
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  );
+                }
+              )}
           </Table>
         </TableContainer>
         <TablePagination
