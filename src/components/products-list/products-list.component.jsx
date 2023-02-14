@@ -48,6 +48,7 @@ export default function ProductsList() {
                 paddingBottom: 24,
                 paddingRight: 24,
                 margin: "1vh",
+                borderRadius: "16px",
               }}
             >
               <ul
