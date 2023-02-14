@@ -47,7 +47,6 @@ export default function Products() {
       .then(() => {
         alert(`Product ${name} eliminado correctamente`);
         console.log(`Deleted ${id}`);
-        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
