@@ -10,6 +10,7 @@ import { CssBaseline } from "@mui/material";
 import theme from "./styles/theme";
 import { Home } from "./components/home/home.component";
 import Products from "./components/products/products.component";
+import ProductsList from "./components/products-list/products-list.component";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,13 +21,18 @@ function App() {
     },
     { path: "home", element: <Home />, errorElement: <ErrorBoundary /> },
     {
+      path: "login",
+      element: <div>Login</div>,
+      errorElement: <ErrorBoundary />,
+    },
+    {
       path: "products",
       element: <Products />,
       errorElement: <ErrorBoundary />,
     },
     {
-      path: "login",
-      element: <div>Login</div>,
+      path: "productos",
+      element: <ProductsList />,
       errorElement: <ErrorBoundary />,
     },
     {
