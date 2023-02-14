@@ -109,6 +109,8 @@ export default function Products() {
                             onClick={() =>
                               deleteProduct({ id: id, name: name })
                             }
+                            variant="contained"
+                            color="primary"
                           >
                             Eliminar
                           </Button>
