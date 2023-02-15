@@ -40,6 +40,7 @@ export default function ProductsList() {
       {products
         .filter(
           ({ itemNumber }) =>
+            itemNumber === "TP100502" ||
             itemNumber === "TP15006" ||
             itemNumber === "TP15007" ||
             itemNumber === "TP15656" ||
