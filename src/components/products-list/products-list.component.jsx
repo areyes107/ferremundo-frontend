@@ -41,10 +41,28 @@ export default function ProductsList() {
         .filter(
           ({ itemNumber }) =>
             itemNumber === "TP100502" ||
+            itemNumber === "TP101594" ||
+            itemNumber === "TP11004" ||
+            itemNumber === "TP12114" ||
+            itemNumber === "TP12407" ||
+            itemNumber === "TP12408" ||
+            itemNumber === "TP12409" ||
+            itemNumber === "TP12482" ||
+            itemNumber === "TP13027" ||
+            itemNumber === "TP13028" ||
+            itemNumber === "TP13029" ||
+            itemNumber === "TP13594" ||
+            itemNumber === "TP14013" ||
+            itemNumber === "TP14635" ||
+            itemNumber === "TP14658" ||
+            itemNumber === "TP14659" ||
             itemNumber === "TP15006" ||
             itemNumber === "TP15007" ||
             itemNumber === "TP15656" ||
             itemNumber === "TP15657" ||
+            itemNumber === "TP15679" ||
+            itemNumber === "TP16683" ||
+            itemNumber === "TP16684" ||
             itemNumber === "TP19360"
         )
         .map(({ itemPic, name, itemsItemId, unitPrice, category }) => {
