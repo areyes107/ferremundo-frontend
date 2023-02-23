@@ -11,6 +11,8 @@ import theme from "./styles/theme";
 import { Home } from "./components/home/home.component";
 import Products from "./components/products/products.component";
 import ProductsList from "./components/products-list/products-list.component";
+import PageLayout from "./components/page/page";
+import Navbar from "./components/navbar/navbar.component";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,30 +21,51 @@ function App() {
       element: <Home />,
       errorElement: <ErrorBoundary />,
     },
-    { path: "home", element: <Home />, errorElement: <ErrorBoundary /> },
+    {
+      path: "home",
+      element: (
+        <Fragment>
+          <Navbar />
+          <Home />
+        </Fragment>
+      ),
+      errorElement: <ErrorBoundary />,
+    },
     {
       path: "login",
-      element: <div>Login</div>,
+      element: (
+        <PageLayout>
+          <div>Login</div>
+        </PageLayout>
+      ),
       errorElement: <ErrorBoundary />,
     },
     {
       path: "products",
-      element: <Products />,
+      element: (
+        <PageLayout>
+          <Products />
+        </PageLayout>
+      ),
       errorElement: <ErrorBoundary />,
     },
     {
       path: "productos",
-      element: <ProductsList />,
+      element: (
+        <PageLayout>
+          <ProductsList />
+        </PageLayout>
+      ),
       errorElement: <ErrorBoundary />,
     },
     {
       path: "*",
       element: (
-        <Fragment>
+        <PageLayout>
           <div style={{ padding: "10vh" }}>
             <h1>NOT FOUND</h1>
           </div>
-        </Fragment>
+        </PageLayout>
       ),
     },
   ]);
