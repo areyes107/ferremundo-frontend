@@ -31,7 +31,7 @@ export default function Navbar() {
   return (
     <div>
       <Box sx={{ flexGrow: 1, marginBottom: 3 }}>
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: "#b53836" }}>
           <Toolbar>
             <Typography
               noWrap

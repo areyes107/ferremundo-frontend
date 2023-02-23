@@ -12,7 +12,6 @@ import { Home } from "./components/home/home.component";
 import Products from "./components/products/products.component";
 import ProductsList from "./components/products-list/products-list.component";
 import PageLayout from "./components/page/page";
-import Navbar from "./components/navbar/navbar.component";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,10 +23,9 @@ function App() {
     {
       path: "home",
       element: (
-        <Fragment>
-          <Navbar />
+        <PageLayout>
           <Home />
-        </Fragment>
+        </PageLayout>
       ),
       errorElement: <ErrorBoundary />,
     },
