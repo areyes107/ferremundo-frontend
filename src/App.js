@@ -17,7 +17,12 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "",
-      element: <Home />,
+
+      element: (
+        <PageLayout>
+          <Home />
+        </PageLayout>
+      ),
       errorElement: <ErrorBoundary />,
     },
     {
