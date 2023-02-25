@@ -52,13 +52,13 @@ export default function Navbar() {
             }}
           >
             <img
+              src={logo}
+              alt="Ferremundo"
               style={{
                 display: { xs: "none", md: "flex" },
                 mr: 1,
                 height: "5vh",
               }}
-              src={logo}
-              alt="Ferremundo"
             />
           </Typography>
 
