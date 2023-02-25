@@ -12,7 +12,7 @@ import {
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/img/WhatsApp Image 2023-02-04 at 10.32.17.jpeg";
+import logo from "../../assets/img/logo-ferremundo.jpeg";
 
 const pages = [{ label: "Productos", route: "/productos" }];
 
