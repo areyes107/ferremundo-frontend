@@ -43,7 +43,7 @@ export default function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            onClick={() => history("/home")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -52,6 +52,7 @@ export default function Navbar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             <img
@@ -109,7 +110,7 @@ export default function Navbar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            onClick={() => history("/home")}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -119,6 +120,7 @@ export default function Navbar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             <img
