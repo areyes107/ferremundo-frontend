@@ -1,9 +1,8 @@
-import { Adb, Menu, ShoppingCart } from "@mui/icons-material";
+import { Menu } from "@mui/icons-material";
 import {
   AppBar,
   Box,
   Button,
-  CssBaseline,
   IconButton,
   MenuItem,
   Toolbar,
@@ -12,7 +11,7 @@ import {
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/img/logo-ferremundo.jpeg";
+import logo from "../../assets/img/logo-ferremundo.png";
 
 const pages = [{ label: "Productos", route: "/productos" }];
 
