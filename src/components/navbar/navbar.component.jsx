@@ -1,17 +1,20 @@
-import { Menu } from "@mui/icons-material";
 import {
   AppBar,
   Box,
   Button,
   IconButton,
+  Menu,
+  Container,
   MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Container } from "@mui/system";
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo-ferremundo.png";
+import Tooltip from "@mui/material/Tooltip";
+import { ShoppingCart, Menu as MenuIcon } from "@mui/icons-material";
 
 const pages = [{ label: "Productos", route: "/productos" }];
 
@@ -71,7 +74,7 @@ export default function Navbar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <Menu />
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -138,6 +141,14 @@ export default function Navbar() {
                 {page.label}
               </Button>
             ))}
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Carrito de Compras">
+              <IconButton sx={{ p: 0 }}>
+                <ShoppingCart alt="Carrito" style={{ color: "#FFFFFF" }} />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </Container>

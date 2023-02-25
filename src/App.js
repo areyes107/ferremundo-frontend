@@ -4,7 +4,7 @@ import {
   RouterProvider,
   useRouteError,
 } from "react-router-dom";
-import React, { Fragment } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { CssBaseline } from "@mui/material";
 import theme from "./styles/theme";
