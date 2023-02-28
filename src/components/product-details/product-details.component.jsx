@@ -26,7 +26,8 @@ export default function ProductDetails() {
   const id = searchParams.get("id");
   // eslint-disable-next-line
   const [product, setProduct] = UseProductsData(id);
-  const { itemPic, name, unitPrice, category } = product;
+  const { itemPic, name, unitPrice, category, description, itemNumber } =
+    product;
 
   useEffect(() => {}, []);
 
@@ -70,7 +71,7 @@ export default function ProductDetails() {
                 textTransform: "uppercase",
                 fontSize: "1.5em",
                 fontWeight: "bold",
-                borderBottom: "1px solid #abb8c3",
+                borderBottom: "1px solid #e1e1e1",
                 marginBlockEnd: 0,
               }}
             >
@@ -89,14 +90,21 @@ export default function ProductDetails() {
             >
               {unitPrice}
             </h5>
+            <p>{description} </p>
             <h6
               style={{
                 textTransform: "uppercase",
                 fontSize: "1em",
+                marginBlockEnd: 0,
+                marginBlockStart: 0,
               }}
             >
               {category}
             </h6>
+            <p style={{ fontSize: 11, marginBlockStart: 0 }}>
+              <b> Código: </b>
+              {itemNumber && itemNumber.substring(2)}
+            </p>
             <Button
               style={{
                 backgroundColor: "#b53836",
