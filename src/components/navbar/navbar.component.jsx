@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo-ferremundo.png";
 import Tooltip from "@mui/material/Tooltip";
-import { ShoppingCart, Menu as MenuIcon } from "@mui/icons-material";
+import { ShoppingBagOutlined, Menu as MenuIcon } from "@mui/icons-material";
 
 const pages = [{ label: "Productos", route: "/productos" }];
 
@@ -148,7 +148,10 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Carrito de Compras">
               <IconButton sx={{ p: 0 }}>
-                <ShoppingCart alt="Carrito" style={{ color: "#FFFFFF" }} />
+                <ShoppingBagOutlined
+                  alt="Carrito"
+                  style={{ color: "#FFFFFF" }}
+                />
               </IconButton>
             </Tooltip>
           </Box>
