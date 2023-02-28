@@ -12,6 +12,7 @@ import { Home } from "./components/home/home.component";
 import Products from "./components/products/products.component";
 import ProductsList from "./components/products-list/products-list.component";
 import PageLayout from "./components/page/page";
+import ProductDetails from "./components/product-details/product-details.component";
 
 function App() {
   const router = createBrowserRouter([
@@ -57,6 +58,16 @@ function App() {
       element: (
         <PageLayout>
           <ProductsList />
+        </PageLayout>
+      ),
+      errorElement: <ErrorBoundary />,
+    },
+
+    {
+      path: "producto",
+      element: (
+        <PageLayout>
+          <ProductDetails />
         </PageLayout>
       ),
       errorElement: <ErrorBoundary />,
