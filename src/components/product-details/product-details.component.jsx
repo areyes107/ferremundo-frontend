@@ -1,4 +1,4 @@
-import { Button, Paper } from "@mui/material";
+import { Button } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
