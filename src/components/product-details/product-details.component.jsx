@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -32,16 +32,21 @@ export default function ProductDetails() {
   useEffect(() => {}, []);
 
   return (
-    <div style={{ padding: "2vh" }}>
-      <div
-        style={{
+    <Container sx={{ padding: "2vh", backgroundColor: "#ffffff" }}>
+      <Container
+        sx={{
           marginLeft: "auto",
           marginRight: "auto",
-          maxWidth: "1000px",
+          maxWidth: "1500px",
         }}
       >
-        <div style={{ display: "flex" }}>
-          <div style={{ width: "50%" }}>
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+          }}
+        >
+          <Container sx={{ width: { sx: "100%", md: "50%" } }}>
             <img
               src={
                 itemPic !== null
@@ -54,16 +59,16 @@ export default function ProductDetails() {
                 borderRadius: "8px",
               }}
             />
-          </div>
-          <div
-            style={{
+          </Container>
+          <Container
+            sx={{
               marginBottom: "0.5em",
               padding: "16px",
               backgroundColor: "#ffffff",
               textAlign: "left",
               justifyContent: "center",
               alignItems: "center",
-              width: "50%",
+              width: { sx: "100%", md: "50%" },
             }}
           >
             <h5
@@ -114,9 +119,9 @@ export default function ProductDetails() {
             >
               Agregar al Carrito
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Container>
+        </Container>
+      </Container>
+    </Container>
   );
 }
