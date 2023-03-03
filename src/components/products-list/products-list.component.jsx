@@ -26,7 +26,11 @@ const UseProductsData = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      listProducts.sort((a, b) => a.itemsItemId - b.itemsItemId);
+      listProducts.sort((a, b) => {
+        const nameA = a.name.toLowerCase(),
+          nameB = b.name.toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
       setProductsData(listProducts);
     };
     getProducts();
