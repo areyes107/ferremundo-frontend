@@ -185,11 +185,22 @@ export default function Navbar() {
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Carrito de Compras">
-              <IconButton sx={{ p: 0 }}>
+              <IconButton sx={{ p: 0, display: "flex" }}>
                 <ShoppingBagOutlined
                   alt="Carrito"
                   style={{ color: "#FFFFFF" }}
+                  fontSize="large"
                 />
+                <Typography
+                  sx={{
+                    marginLeft: "-22px",
+                    color: "#ffffff",
+                    fontSize: "15px",
+                    marginTop: "5px",
+                  }}
+                >
+                  0
+                </Typography>
               </IconButton>
             </Tooltip>
           </Box>
