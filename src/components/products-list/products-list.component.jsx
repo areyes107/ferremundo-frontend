@@ -179,7 +179,13 @@ export default function ProductsList() {
                     }}
                     variant="contained"
                     onClick={() =>
-                      addProductToCart({ itemPic, name, category, id })
+                      addProductToCart({
+                        itemPic,
+                        name,
+                        category,
+                        id,
+                        unitPrice,
+                      })
                     }
                   >
                     Agregar al Carrito

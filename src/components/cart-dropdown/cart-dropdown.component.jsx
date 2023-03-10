@@ -10,7 +10,7 @@ const CartDropdown = () => {
       <Container
         sx={{
           position: "absolute",
-          width: "240px",
+          width: "300px",
           height: "340px",
           display: "flex",
           flexDirection: "column",
