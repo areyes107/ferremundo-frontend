@@ -1,7 +1,6 @@
 import {
   AppBar,
   Box,
-  Button,
   IconButton,
   Menu,
   Container,
@@ -10,11 +9,15 @@ import {
   Typography,
 } from "@mui/material";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import logo from "../../assets/img/logo-ferremundo.png";
-import Tooltip from "@mui/material/Tooltip";
-import { ShoppingBagOutlined, Menu as MenuIcon } from "@mui/icons-material";
+import { Menu as MenuIcon } from "@mui/icons-material";
+
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
+import { CartContext } from "../../context/cart.context";
 
 const pages = [
   { label: "Inicio", route: "/home" },
@@ -22,6 +25,7 @@ const pages = [
 ];
 
 export default function Navbar() {
+  const { isCartOpen } = useContext(CartContext);
   const history = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -32,10 +36,6 @@ export default function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleGoTo = (route) => {
-    history(route);
   };
 
   return (
@@ -183,28 +183,9 @@ export default function Navbar() {
           >
             Iniciar Sesión
           </NavLink>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Carrito de Compras">
-              <IconButton sx={{ p: 0, display: "flex" }}>
-                <ShoppingBagOutlined
-                  alt="Carrito"
-                  style={{ color: "#FFFFFF" }}
-                  fontSize="large"
-                />
-                <Typography
-                  sx={{
-                    marginLeft: "-22px",
-                    color: "#ffffff",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                  }}
-                >
-                  0
-                </Typography>
-              </IconButton>
-            </Tooltip>
-          </Box>
+          <CartIcon />
         </Toolbar>
+        {isCartOpen && <CartDropdown />}
       </Container>
     </AppBar>
   );

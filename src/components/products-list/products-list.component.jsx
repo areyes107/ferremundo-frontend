@@ -116,10 +116,7 @@ export default function ProductsList() {
         {ShowFilterContent(searchField).map(
           ({ itemPic, name, unitPrice, category, id }) => {
             return (
-              <Paper
-                onClick={() => goToProductDetail(id)}
-                style={{ borderRadius: "12px", cursor: "pointer" }}
-              >
+              <Paper style={{ borderRadius: "12px", cursor: "pointer" }}>
                 <img
                   src={
                     itemPic !== null
@@ -131,6 +128,7 @@ export default function ProductsList() {
                     width: "100%",
                     borderRadius: "8px",
                   }}
+                  onClick={() => goToProductDetail(id)}
                 />
                 <div
                   style={{
@@ -148,6 +146,7 @@ export default function ProductsList() {
                       fontSize: "1.5em",
                       fontWeight: "bold",
                     }}
+                    onClick={() => goToProductDetail(id)}
                   >
                     {name}
                   </h5>
@@ -156,10 +155,16 @@ export default function ProductsList() {
                       textTransform: "uppercase",
                       fontSize: "1em",
                     }}
+                    onClick={() => goToProductDetail(id)}
                   >
                     {category}
                   </h6>
-                  <p style={{ color: "#777" }}>{unitPrice}</p>
+                  <p
+                    onClick={() => goToProductDetail(id)}
+                    style={{ color: "#777" }}
+                  >
+                    {unitPrice}
+                  </p>
                   <Button
                     style={{
                       backgroundColor: "#b53836",
