@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../context/cart.context";
 
 const CartIcon = () => {
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
   return (
     <div>
       <Box sx={{ flexGrow: 0 }}>
@@ -36,7 +36,7 @@ const CartIcon = () => {
                 bottom: "14px",
               }}
             >
-              0
+              {cartCount}
             </span>
           </IconButton>
         </Tooltip>
