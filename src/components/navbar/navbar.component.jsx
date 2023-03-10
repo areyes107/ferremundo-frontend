@@ -11,12 +11,15 @@ import {
 } from "@mui/material";
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import logo from "../../assets/img/logo-ferremundo.png";
 import Tooltip from "@mui/material/Tooltip";
 import { ShoppingBagOutlined, Menu as MenuIcon } from "@mui/icons-material";
 
-const pages = [{ label: "Productos", route: "/productos" }];
+const pages = [
+  { label: "Inicio", route: "/home" },
+  { label: "Productos", route: "/productos" },
+];
 
 export default function Navbar() {
   const history = useNavigate();
@@ -96,11 +99,18 @@ export default function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  key={page.label}
-                  onClick={() => handleGoTo(page.route)}
-                >
-                  <Typography textAlign="center">{page.label}</Typography>
+                <MenuItem key={page.label}>
+                  <NavLink
+                    to={page.route}
+                    style={({ isActive, isPending }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                        color: isPending ? "red" : "black",
+                      };
+                    }}
+                  >
+                    {page.label}
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -135,16 +145,40 @@ export default function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page.label}
-                onClick={() => handleGoTo(page.route)}
-                sx={{ my: 2, color: "white", display: "block" }}
+              <NavLink
+                to={page.route}
+                style={({ isActive }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: "#ffffff",
+                    textDecoration: "none",
+                    border: isActive && "1px solid #ffffff",
+                    borderRadius: isActive && "5px",
+                    padding: "5px",
+                  };
+                }}
               >
                 {page.label}
-              </Button>
+              </NavLink>
             ))}
           </Box>
 
+          <NavLink
+            to="/login"
+            style={({ isActive }) => {
+              return {
+                fontWeight: isActive ? "bold" : "",
+                color: "#ffffff",
+                textDecoration: "none",
+                border: isActive && "1px solid #ffffff",
+                borderRadius: isActive && "5px",
+                padding: "5px",
+                paddingRight: "8px",
+              };
+            }}
+          >
+            Iniciar Sesión
+          </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Carrito de Compras">
               <IconButton sx={{ p: 0 }}>
