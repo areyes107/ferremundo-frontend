@@ -7,8 +7,9 @@ import {
   Select,
 } from "@mui/material";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { CartContext } from "../../context/cart.context";
 import { db } from "../../firebase/firebase.util";
 import SearchBox from "../search-box/search-box.component";
 
@@ -45,6 +46,8 @@ const Filters = {
 };
 
 export default function ProductsList() {
+  const { addItemToCart } = useContext(CartContext);
+
   // eslint-disable-next-line
   const [products, setProducts] = UseProductsData();
   // eslint-disable-next-line
@@ -82,6 +85,10 @@ export default function ProductsList() {
 
   const goToProductDetail = (id) => {
     history(`/producto?${new URLSearchParams({ id: id }).toString()}`);
+  };
+
+  const addProductToCart = (product) => {
+    addItemToCart(product);
   };
 
   return (
@@ -171,6 +178,9 @@ export default function ProductsList() {
                       borderRadius: "12px",
                     }}
                     variant="contained"
+                    onClick={() =>
+                      addProductToCart({ itemPic, name, category, id })
+                    }
                   >
                     Agregar al Carrito
                   </Button>

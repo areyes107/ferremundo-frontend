@@ -1,7 +1,10 @@
 import { Button, Container } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../context/cart.context";
+import CartItem from "../cart-item/cart-item.component";
 
 const CartDropdown = () => {
+  const { cartItems } = useContext(CartContext);
   return (
     <div>
       <Container
@@ -27,11 +30,12 @@ const CartDropdown = () => {
             flexDirection: "column",
             overflow: "scroll",
           }}
-        ></Container>
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "#b53836", color: "#ffffff" }}
         >
+          {cartItems.map((item) => (
+            <CartItem key={item.itemNumber} cartItem={item} />
+          ))}
+        </Container>
+        <Button variant="contained" style={{ backgroundColor: "#b53836" }}>
           Hacer Pedido
         </Button>
       </Container>
