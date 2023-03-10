@@ -102,10 +102,14 @@ export default function Navbar() {
                 <MenuItem key={page.label}>
                   <NavLink
                     to={page.route}
-                    style={({ isActive, isPending }) => {
+                    style={({ isActive }) => {
                       return {
                         fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
+                        color: "#000000",
+                        textDecoration: "none",
+                        border: isActive && "1px solid #000000",
+                        borderRadius: isActive && "5px",
+                        padding: "5px",
                       };
                     }}
                   >
