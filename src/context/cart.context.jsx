@@ -66,9 +66,15 @@ export const CartProvider = ({ children }) => {
       (total, cartItem) =>
         total +
         cartItem.quantity *
-          Number(cartItem.unitPrice.replace("Q", "").replace(/\s+/g, "")),
+          Number(
+            cartItem.unitPrice
+              .replace("Q", "")
+              .replace(/\s+/g, "")
+              .replace(",", "")
+          ),
       0
     );
+    console.log(newCartTotal);
     setCartTotal(newCartTotal);
   }, [cartItems]);
 
