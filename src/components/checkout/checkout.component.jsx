@@ -3,8 +3,10 @@ import React, { useContext } from "react";
 import { CartContext } from "../../context/cart.context";
 import { send } from "emailjs-com";
 
+import CheckoutItem from "../checkout-item/checkout-item.component";
+
 const Checkout = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   const generateOrderSummary = async (orderItems) => {
     const orderSummary = await orderItems.reduce((summary, orderItem) => {
@@ -31,43 +33,58 @@ const Checkout = () => {
     });
   };
   return (
-    <div>
-      <div style={{ paddingLeft: "2vw" }}>
-        {cartItems.map(
-          ({ name, category, unitPrice, itemNumber, quantity, itemPic }) => {
-            return (
-              <ul
-                style={{
-                  listStyle: "none",
-                  padding: 0,
-                  margin: 0,
-                  paddingBottom: "1vh",
-                }}
-              >
-                <li>
-                  <img src={itemPic} alt="" style={{ width: "150px" }} />
-                </li>
-                <li>{name}</li>
-                <li>Código: {itemNumber}</li>
-                <li>Precio: {unitPrice}</li>
-                <li>Marca: {category}</li>
-                <li>Cantidad:{quantity}</li>
-              </ul>
-            );
-          }
-        )}
-        {cartItems.length !== 0 ? (
-          <Button
-            style={{ backgroundColor: "#b53836" }}
-            variant="contained"
-            onClick={() => sendMessage()}
-          >
-            Realizar Pedido
-          </Button>
-        ) : (
-          <h1>No tienes productos agregados en tu carrito</h1>
-        )}
+    <div
+      style={{
+        width: "95%",
+        minHeight: "90vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "50px auto 0",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          padding: "10px 0",
+          display: "flex",
+          justifyContent: "space-between",
+          borderBottom: "1px solid darkgrey",
+        }}
+      >
+        <div style={{ textTransform: "capitalize", width: "14%" }}>Imagen</div>
+        <div style={{ textTransform: "capitalize", width: "16%" }}>
+          Producto
+        </div>
+        <div style={{ textTransform: "capitalize", width: "14%" }}>
+          Cantidad
+        </div>
+        <div style={{ textTransform: "capitalize", width: "14%" }}>Precio</div>
+        <div style={{ textTransform: "capitalize", width: "14%" }}>Marca</div>
+        <div style={{ textTransform: "capitalize", width: "14%" }}>Código</div>
+        <div style={{ textTransform: "capitalize", width: "14%" }}>
+          Eliminar
+        </div>
       </div>
+      {cartItems.map((cartItem) => {
+        return <CheckoutItem cartItem={cartItem} />;
+      })}
+      <span
+        style={{ marginTop: "30px", marginLeft: "auto", fontSize: " 36px" }}
+      >
+        Total: Q{cartTotal}
+      </span>
+      {cartItems.length !== 0 ? (
+        <Button
+          style={{ backgroundColor: "#b53836" }}
+          variant="contained"
+          onClick={() => sendMessage()}
+        >
+          Terminar Pedido
+        </Button>
+      ) : (
+        <h1>No tienes productos agregados en tu carrito</h1>
+      )}
     </div>
   );
 };

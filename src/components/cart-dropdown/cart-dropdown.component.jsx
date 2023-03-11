@@ -6,7 +6,12 @@ import CartItem from "../cart-item/cart-item.component";
 
 const CartDropdown = () => {
   const history = useNavigate();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setIsCartOpen } = useContext(CartContext);
+
+  const goToCheckout = () => {
+    history("/checkout");
+    setIsCartOpen(false);
+  };
   return (
     <div>
       <Container
@@ -46,9 +51,9 @@ const CartDropdown = () => {
             <Button
               variant="contained"
               style={{ backgroundColor: "#b53836" }}
-              onClick={() => history("/checkout")}
+              onClick={() => goToCheckout()}
             >
-              Hacer Pedido
+              Realizar Pedido
             </Button>
           </Fragment>
         ) : (
