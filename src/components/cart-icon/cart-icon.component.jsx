@@ -1,5 +1,5 @@
 import { ShoppingBagOutlined } from "@mui/icons-material";
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
 
@@ -18,22 +18,22 @@ const CartIcon = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "50px",
-              height: "50px",
+              width: "55px",
+              height: "55px",
             }}
             onClick={() => setIsCartOpen(!isCartOpen)}
           >
             <ShoppingBagOutlined
               alt="Carrito"
-              style={{ color: "#FFFFFF", width: "29px", height: "29px" }}
+              style={{ color: "#FFFFFF", width: "34px", height: "34px" }}
             />
             <span
               style={{
                 position: "absolute",
                 color: "#ffffff",
-                fontSize: "13px",
+                fontSize: "12px",
                 fontWeight: "bold",
-                bottom: "14px",
+                bottom: "16px",
               }}
             >
               {cartCount}

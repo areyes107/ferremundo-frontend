@@ -121,7 +121,7 @@ export default function ProductsList() {
         }}
       >
         {ShowFilterContent(searchField).map(
-          ({ itemPic, name, unitPrice, category, id }) => {
+          ({ itemPic, name, unitPrice, category, id, itemNumber }) => {
             return (
               <Paper style={{ borderRadius: "12px", cursor: "pointer" }}>
                 <img
@@ -185,6 +185,7 @@ export default function ProductsList() {
                         category,
                         id,
                         unitPrice,
+                        itemNumber,
                       })
                     }
                   >

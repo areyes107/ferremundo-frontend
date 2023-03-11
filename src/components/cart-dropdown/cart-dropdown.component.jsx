@@ -1,9 +1,11 @@
 import { Button, Container } from "@mui/material";
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/cart.context";
 import CartItem from "../cart-item/cart-item.component";
 
 const CartDropdown = () => {
+  const history = useNavigate();
   const { cartItems } = useContext(CartContext);
   return (
     <div>
@@ -23,21 +25,37 @@ const CartDropdown = () => {
           borderRadius: "12px",
         }}
       >
-        <Container
-          sx={{
-            height: "240px",
-            display: "flex",
-            flexDirection: "column",
-            overflow: "scroll",
-          }}
-        >
-          {cartItems.map((item) => (
-            <CartItem key={item.itemNumber} cartItem={item} />
-          ))}
-        </Container>
-        <Button variant="contained" style={{ backgroundColor: "#b53836" }}>
-          Hacer Pedido
-        </Button>
+        {cartItems.length !== 0 ? (
+          <Fragment>
+            <Container
+              sx={{
+                height: "240px",
+                display: "flex",
+                flexDirection: "column",
+                overflow: "scroll",
+              }}
+            >
+              {cartItems.map((item) => (
+                <Fragment>
+                  {cartItems.length !== 0 && (
+                    <CartItem key={item.itemNumber} cartItem={item} />
+                  )}
+                </Fragment>
+              ))}
+            </Container>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "#b53836" }}
+              onClick={() => history("/checkout")}
+            >
+              Hacer Pedido
+            </Button>
+          </Fragment>
+        ) : (
+          <div style={{ color: "black" }}>
+            No hay productos agregados en tu carrito
+          </div>
+        )}
       </Container>
     </div>
   );
