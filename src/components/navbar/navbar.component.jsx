@@ -166,23 +166,6 @@ export default function Navbar() {
               </NavLink>
             ))}
           </Box>
-
-          <NavLink
-            to="/login"
-            style={({ isActive }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: "#ffffff",
-                textDecoration: "none",
-                border: isActive && "1px solid #ffffff",
-                borderRadius: isActive && "5px",
-                padding: "5px",
-                paddingRight: "8px",
-              };
-            }}
-          >
-            Iniciar Sesión
-          </NavLink>
           <CartIcon />
         </Toolbar>
         {isCartOpen && <CartDropdown />}
