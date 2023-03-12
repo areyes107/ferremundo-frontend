@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
-import Bomba from "../../assets/img/bomba_agua.jpeg";
+import Bomba from "../../assets/img/bomba_agua.png";
 import CategoryItem from "../../category-item/category-item.component";
-import Soldadora from "../../assets/img/soldadora.jpeg";
-import Compresor from "../../assets/img/compresor.jpeg";
+import Soldadora from "../../assets/img/soldadora.png";
+import Compresor from "../../assets/img/compresor.png";
 import Toolcraft from "../../assets/img/toolcraft.png";
-import Truper from "../../assets/img/truper.jpeg";
+import Truper from "../../assets/img/truper.png";
 
 export function Home() {
   const categories = [
