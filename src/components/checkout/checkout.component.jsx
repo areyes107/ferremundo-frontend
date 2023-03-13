@@ -1,37 +1,17 @@
 import { Button } from "@mui/material";
 import React, { useContext } from "react";
 import { CartContext } from "../../context/cart.context";
-import { send } from "emailjs-com";
-
 import CheckoutItem from "../checkout-item/checkout-item.component";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
+  const history = useNavigate();
   const { cartItems, cartTotal } = useContext(CartContext);
 
-  const generateOrderSummary = async (orderItems) => {
-    const orderSummary = await orderItems.reduce((summary, orderItem) => {
-      return (
-        `${summary} \n \n` +
-        ` -Producto: ${orderItem.name} \n -Precio: ${orderItem.unitPrice} \n -Cantidad: ${orderItem.quantity} \n -Código: ${orderItem.itemNumber}`
-      );
-    }, "");
-
-    return orderSummary;
+  const goToFinalCheckout = () => {
+    history("/finalCheckout");
   };
 
-  const sendMessage = () => {
-    generateOrderSummary(cartItems).then((message) => {
-      send(
-        "service_k1v53pr",
-        "template_2piusco",
-        { message: message },
-        "vPrTcY6qR6G82xFk9"
-      ).then(
-        (result) => console.log(result.text),
-        (error) => console.log(error.text)
-      );
-    });
-  };
   return (
     <div
       style={{
@@ -78,9 +58,9 @@ const Checkout = () => {
         <Button
           style={{ backgroundColor: "#b53836" }}
           variant="contained"
-          onClick={() => sendMessage()}
+          onClick={() => goToFinalCheckout(cartItems)}
         >
-          Terminar Pedido
+          Datos para envío
         </Button>
       ) : (
         <h1>No tienes productos agregados en tu carrito</h1>
