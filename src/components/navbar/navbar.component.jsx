@@ -1,7 +1,6 @@
 import {
   AppBar,
   Box,
-  Button,
   IconButton,
   Menu,
   Container,
@@ -10,15 +9,23 @@ import {
   Typography,
 } from "@mui/material";
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import logo from "../../assets/img/logo-ferremundo.png";
-import Tooltip from "@mui/material/Tooltip";
-import { ShoppingBagOutlined, Menu as MenuIcon } from "@mui/icons-material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 
-const pages = [{ label: "Productos", route: "/productos" }];
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
+import { CartContext } from "../../context/cart.context";
+
+const pages = [
+  { label: "Inicio", route: "/home" },
+  { label: "Productos", route: "/productos" },
+];
 
 export default function Navbar() {
+  const { isCartOpen } = useContext(CartContext);
   const history = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -29,10 +36,6 @@ export default function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleGoTo = (route) => {
-    history(route);
   };
 
   return (
@@ -96,11 +99,22 @@ export default function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  key={page.label}
-                  onClick={() => handleGoTo(page.route)}
-                >
-                  <Typography textAlign="center">{page.label}</Typography>
+                <MenuItem key={page.label}>
+                  <NavLink
+                    to={page.route}
+                    style={({ isActive }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                        color: "#000000",
+                        textDecoration: "none",
+                        border: isActive && "1px solid #000000",
+                        borderRadius: isActive && "5px",
+                        padding: "5px",
+                      };
+                    }}
+                  >
+                    {page.label}
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -135,27 +149,26 @@ export default function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page.label}
-                onClick={() => handleGoTo(page.route)}
-                sx={{ my: 2, color: "white", display: "block" }}
+              <NavLink
+                to={page.route}
+                style={({ isActive }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: "#ffffff",
+                    textDecoration: "none",
+                    border: isActive && "1px solid #ffffff",
+                    borderRadius: isActive && "5px",
+                    padding: "5px",
+                  };
+                }}
               >
                 {page.label}
-              </Button>
+              </NavLink>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Carrito de Compras">
-              <IconButton sx={{ p: 0 }}>
-                <ShoppingBagOutlined
-                  alt="Carrito"
-                  style={{ color: "#FFFFFF" }}
-                />
-              </IconButton>
-            </Tooltip>
-          </Box>
+          <CartIcon />
         </Toolbar>
+        {isCartOpen && <CartDropdown />}
       </Container>
     </AppBar>
   );

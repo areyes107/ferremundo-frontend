@@ -13,6 +13,8 @@ import Products from "./components/products/products.component";
 import ProductsList from "./components/products-list/products-list.component";
 import PageLayout from "./components/page/page";
 import ProductDetails from "./components/product-details/product-details.component";
+import Checkout from "./components/checkout/checkout.component";
+import FinalCheckout from "./components/final-checkout/final-checkout.component";
 
 function App() {
   const router = createBrowserRouter([
@@ -68,6 +70,24 @@ function App() {
       element: (
         <PageLayout>
           <ProductDetails />
+        </PageLayout>
+      ),
+      errorElement: <ErrorBoundary />,
+    },
+    {
+      path: "checkout",
+      element: (
+        <PageLayout>
+          <Checkout />
+        </PageLayout>
+      ),
+      errorElement: <ErrorBoundary />,
+    },
+    {
+      path: "finalCheckout",
+      element: (
+        <PageLayout>
+          <FinalCheckout />
         </PageLayout>
       ),
       errorElement: <ErrorBoundary />,

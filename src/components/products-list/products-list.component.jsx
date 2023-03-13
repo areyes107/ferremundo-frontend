@@ -7,8 +7,9 @@ import {
   Select,
 } from "@mui/material";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { CartContext } from "../../context/cart.context";
 import { db } from "../../firebase/firebase.util";
 import SearchBox from "../search-box/search-box.component";
 
@@ -26,7 +27,11 @@ const UseProductsData = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      listProducts.sort((a, b) => a.itemsItemId - b.itemsItemId);
+      listProducts.sort((a, b) => {
+        const nameA = a.name.toLowerCase(),
+          nameB = b.name.toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
       setProductsData(listProducts);
     };
     getProducts();
@@ -41,6 +46,8 @@ const Filters = {
 };
 
 export default function ProductsList() {
+  const { addItemToCart } = useContext(CartContext);
+
   // eslint-disable-next-line
   const [products, setProducts] = UseProductsData();
   // eslint-disable-next-line
@@ -80,6 +87,10 @@ export default function ProductsList() {
     history(`/producto?${new URLSearchParams({ id: id }).toString()}`);
   };
 
+  const addProductToCart = (product) => {
+    addItemToCart(product);
+  };
+
   return (
     <div style={{ padding: "2vw" }}>
       <div>
@@ -110,12 +121,9 @@ export default function ProductsList() {
         }}
       >
         {ShowFilterContent(searchField).map(
-          ({ itemPic, name, unitPrice, category, id }) => {
+          ({ itemPic, name, unitPrice, category, id, itemNumber }) => {
             return (
-              <Paper
-                onClick={() => goToProductDetail(id)}
-                style={{ borderRadius: "12px", cursor: "pointer" }}
-              >
+              <Paper style={{ borderRadius: "12px", cursor: "pointer" }}>
                 <img
                   src={
                     itemPic !== null
@@ -127,6 +135,7 @@ export default function ProductsList() {
                     width: "100%",
                     borderRadius: "8px",
                   }}
+                  onClick={() => goToProductDetail(id)}
                 />
                 <div
                   style={{
@@ -144,6 +153,7 @@ export default function ProductsList() {
                       fontSize: "1.5em",
                       fontWeight: "bold",
                     }}
+                    onClick={() => goToProductDetail(id)}
                   >
                     {name}
                   </h5>
@@ -152,16 +162,32 @@ export default function ProductsList() {
                       textTransform: "uppercase",
                       fontSize: "1em",
                     }}
+                    onClick={() => goToProductDetail(id)}
                   >
                     {category}
                   </h6>
-                  <p style={{ color: "#777" }}>{unitPrice}</p>
+                  <p
+                    onClick={() => goToProductDetail(id)}
+                    style={{ color: "#777" }}
+                  >
+                    {unitPrice}
+                  </p>
                   <Button
                     style={{
                       backgroundColor: "#b53836",
                       borderRadius: "12px",
                     }}
                     variant="contained"
+                    onClick={() =>
+                      addProductToCart({
+                        itemPic,
+                        name,
+                        category,
+                        id,
+                        unitPrice,
+                        itemNumber,
+                      })
+                    }
                   >
                     Agregar al Carrito
                   </Button>
