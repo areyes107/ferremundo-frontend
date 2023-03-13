@@ -99,55 +99,74 @@ const FinalCheckout = () => {
           sx={{ paddingBottom: "10px" }}
           variant="outlined"
           fullWidth
+          size="medium"
+          required
           label="Nombre"
           onChange={handleNameChange}
           value={name}
           name="name"
+          type="text"
+          autoFocus
         />
         <TextField
           sx={{ paddingBottom: "10px" }}
           variant="outlined"
           fullWidth
+          size="medium"
+          required
           label="Correo"
           onChange={handleEmailChange}
           value={email}
           name="email"
+          type="email"
         />
         <TextField
           sx={{ paddingBottom: "10px" }}
           variant="outlined"
           fullWidth
+          size="medium"
+          required
           label="Número de teléfono"
           onChange={handlePhoneNumberChange}
           value={phoneNumber}
           name="phoneNumber"
+          type="tel"
         />
         <TextField
           sx={{ paddingBottom: "10px" }}
           variant="outlined"
           fullWidth
+          size="medium"
+          required
           label="Dirección"
           onChange={handleDirectionChange}
           value={direction}
           name="direction"
+          type="text"
         />
         <TextField
           sx={{ paddingBottom: "10px" }}
           variant="outlined"
           fullWidth
+          size="medium"
+          required
           label="Municipio"
           onChange={handleTownChange}
           value={town}
           name="town"
+          type="text"
         />
         <TextField
           sx={{ paddingBottom: "10px" }}
           variant="outlined"
           fullWidth
+          size="medium"
+          required
           label="Departamento"
           onChange={handleStateChange}
           value={state}
           name="state"
+          type="text"
         />
       </Box>
       <h2 style={{ textAlign: "center" }}>
