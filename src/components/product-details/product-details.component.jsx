@@ -101,7 +101,7 @@ export default function ProductDetails() {
                 marginBlockStart: 0,
               }}
             >
-              {unitPrice}
+              {unitPrice === "Q 0.00" ? "No Disponible" : unitPrice}
             </h5>
             <p>{description} </p>
             <h6
@@ -118,25 +118,38 @@ export default function ProductDetails() {
               <b> Código: </b>
               {itemNumber && itemNumber.substring(2)}
             </p>
-            <Button
-              style={{
-                backgroundColor: "#b53836",
-                borderRadius: "12px",
-              }}
-              variant="contained"
-              onClick={() =>
-                addProductToCart({
-                  itemPic,
-                  name,
-                  category,
-                  id,
-                  unitPrice,
-                  itemNumber,
-                })
-              }
-            >
-              Agregar al Carrito
-            </Button>
+            {unitPrice === "Q 0.00" ? (
+              <Button
+                sx={{
+                  backgroundColor: "#b53836",
+                  borderRadius: "12px",
+                }}
+                variant="contained"
+                disabled
+              >
+                Agregar al Carrito
+              </Button>
+            ) : (
+              <Button
+                style={{
+                  backgroundColor: "#b53836",
+                  borderRadius: "12px",
+                }}
+                variant="contained"
+                onClick={() =>
+                  addProductToCart({
+                    itemPic,
+                    name,
+                    category,
+                    id,
+                    unitPrice,
+                    itemNumber,
+                  })
+                }
+              >
+                Agregar al Carrito
+              </Button>
+            )}
           </Container>
         </Container>
       </Container>
