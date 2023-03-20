@@ -3,9 +3,11 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Pagination,
   Paper,
   Select,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -57,6 +59,14 @@ export default function ProductsList() {
   const [currentFilter, setCurrentFilter] = useState(searchParams.get("f"));
   const history = useNavigate();
 
+  const pageSize = 12;
+
+  const [pagination, setPagination] = useState({
+    count: 0,
+    from: 0,
+    to: pageSize,
+  });
+
   const handleChange = (event) => {
     const newQuery = event.target.value;
     setSearchParams(new URLSearchParams({ f: currentFilter, q: newQuery }));
@@ -91,6 +101,26 @@ export default function ProductsList() {
     addItemToCart(product);
   };
 
+  useEffect(() => {
+    setPagination({
+      ...pagination,
+      count: ShowFilterContent(searchField).length,
+    });
+    // eslint-disable-next-line
+  }, [ShowFilterContent(searchField)]);
+
+  const handlePageChange = (event, page) => {
+    window.scrollTo(0, 0);
+    const from = (page - 1) * pageSize;
+    const to = (page - 1) * pageSize + pageSize;
+
+    setPagination({
+      ...pagination,
+      from: from,
+      to: to,
+    });
+  };
+
   return (
     <div style={{ padding: "2vw" }}>
       <div>
@@ -120,8 +150,9 @@ export default function ProductsList() {
           gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
         }}
       >
-        {ShowFilterContent(searchField).map(
-          ({ itemPic, name, unitPrice, category, id, itemNumber }) => {
+        {ShowFilterContent(searchField)
+          .slice(pagination.from, pagination.to)
+          .map(({ itemPic, name, unitPrice, category, id, itemNumber }) => {
             return (
               <Paper style={{ borderRadius: "12px", cursor: "pointer" }}>
                 <img
@@ -207,9 +238,21 @@ export default function ProductsList() {
                 </div>
               </Paper>
             );
-          }
-        )}
+          })}
       </div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "2vh",
+        }}
+      >
+        <Pagination
+          count={Math.ceil(pagination.count / pageSize)}
+          onChange={handlePageChange}
+        />
+      </Box>
     </div>
   );
 }
