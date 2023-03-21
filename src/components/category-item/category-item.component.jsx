@@ -12,6 +12,7 @@ const CategoryItem = ({ category }) => {
   };
   return (
     <Paper
+      key={title}
       onClick={() => goToRedirect(redirectUrl)}
       sx={{
         minWidth: "30%",
@@ -48,7 +49,8 @@ const CategoryItem = ({ category }) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            border: "1px solid black",
+            border: "1px solid #444444",
+            borderRadius: "8px",
             backgroundColor: "white",
             opacity: "0.7",
             position: "absolute",

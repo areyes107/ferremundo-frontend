@@ -154,7 +154,10 @@ export default function ProductsList() {
           .slice(pagination.from, pagination.to)
           .map(({ itemPic, name, unitPrice, category, id, itemNumber }) => {
             return (
-              <Paper style={{ borderRadius: "12px", cursor: "pointer" }}>
+              <Paper
+                key={id}
+                style={{ borderRadius: "12px", cursor: "pointer" }}
+              >
                 <img
                   src={
                     itemPic !== null

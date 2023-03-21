@@ -21,7 +21,7 @@ import { CartContext } from "../../context/cart.context";
 
 const pages = [
   { label: "Inicio", route: "/home" },
-  { label: "Productos", route: "/productos" },
+  { label: "Productos", route: "/productos?f=&q=" },
 ];
 
 export default function Navbar() {
@@ -150,6 +150,7 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <NavLink
+                key={page.label}
                 to={page.route}
                 style={({ isActive }) => {
                   return {

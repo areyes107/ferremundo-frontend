@@ -42,18 +42,27 @@ export function Home() {
     },
   ];
   return (
-    <Box
-      sx={{
-        width: "100%",
+    <div
+      style={{
         display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        padding: "2vh",
+        flexDirection: "column",
+        textAlign: "center",
       }}
     >
-      {categories.map((category) => {
-        return <CategoryItem category={category} />;
-      })}
-    </Box>
+      <h1>Categorías y Marcas Destacadas</h1>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          padding: "2vh",
+        }}
+      >
+        {categories.map((category) => {
+          return <CategoryItem key={category.id} category={category} />;
+        })}
+      </Box>
+    </div>
   );
 }
